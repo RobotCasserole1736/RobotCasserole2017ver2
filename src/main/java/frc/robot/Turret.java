@@ -1,6 +1,9 @@
-package main.java.frc.robot;
+package frc.robot;
 
-public class Turret{
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Spark;
+
+public class Turret {
 
     DigitalInput leftLimitSw;
     DigitalInput rightLimitSw;

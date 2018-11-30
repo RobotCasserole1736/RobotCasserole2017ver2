@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.TimedRobot;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -15,12 +17,18 @@ package frc.robot;
  * project.
  */
 public class Robot extends TimedRobot {
+
+  Drivetrain drivetrain;
+  Turret turret;
+
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
    */
   @Override
   public void robotInit() {
+    drivetrain = new Drivetrain();
+    turret = new Turret();
 
   }
 
@@ -37,6 +45,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    drivetrain.setFwdRevCommand(0); //todo populate this from xbox rather than "0"
+    drivetrain.setRotateCommand(0); //todo populate this from xbox rather than "0"
+    drivetrain.update();
+
+    turret.setOpenLoopRotationCommand(0); //todo populate this from xbox rather than "0"
+    turret.update();
 
   }
 

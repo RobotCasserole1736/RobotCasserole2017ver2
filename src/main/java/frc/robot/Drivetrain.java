@@ -1,6 +1,8 @@
-package main.java.frc.robot;
+package frc.robot;
 
-public class Drivetrain{
+import edu.wpi.first.wpilibj.VictorSP;
+
+public class Drivetrain {
 
     VictorSP motorFrontLeft;
     VictorSP motorFrontRight;
@@ -8,10 +10,10 @@ public class Drivetrain{
     VictorSP motorRearRight;
 
     public Drivetrain(){
-        motorFrontLeft = new Spark(1);
-        motorFrontRight = new Spark(1);
-        motorRearLeft = new Spark(1);
-        motorRearRight = new Spark(1);
+        motorFrontLeft = new VictorSP(1);
+        motorFrontRight = new VictorSP(2);
+        motorRearLeft = new VictorSP(3);
+        motorRearRight = new VictorSP(4);
 
     }
 
