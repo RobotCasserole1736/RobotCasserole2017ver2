@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 public class Turret {
 
@@ -17,16 +18,15 @@ public class Turret {
     double openLoopRotationCmd;
     double closedLoopPosCmd_deg;
     double actualPos;
-    double motorCmd;
 
     int closedLoopIndex = 0;
 
     boolean runClosedLoop;
 
-    Spark motorController;
+    Spark motorControl;
 
     public Turret(){
-        motorController = new Spark(0);
+        motorControl = new Spark(0);
         leftLimitSw = new DigitalInput(0);
         rightLimitSw = new DigitalInput(1);
         posEncoder = new Encoder(2, 3);
@@ -58,23 +58,27 @@ public class Turret {
     }
 
     public void bangBang(){
-        if((actualPos <= (closedLoopPosCmd_deg + 1)) || (actualPos >= (closedLoopPosCmd_deg - 1)){
-            motorCmd = motorController.set(0);
+        if((actualPos <= (closedLoopPosCmd_deg + 1)) || (actualPos >= (closedLoopPosCmd_deg - 1))){
+            motorControl.set(0);
         }else if(actualPos <= closedLoopPosCmd_deg){
-            motorCmd = motorController.set(-1);
+            motorControl.set(-1);
         }else if(actualPos >= closedLoopPosCmd_deg){
-            motorCmd = motorController.set(1);
+            motorControl.set(1);
         }
     }
 
     public void update(){
-        if(runClosedLoop == false){
-            setOpenLoopRotationCommand(openLoopController.getX(Hand kleft)); //Will fix this later
+        if(leftLimitSw.get() == true || rightLimitSw.get() == true){
+            motorControl.set(0);
+            
+        }else if(runClosedLoop == false){
+            setOpenLoopRotationCommand(openLoopController.getX(Hand.kLeft)); 
+
         }else if(runClosedLoop == true){
             setClosedLoopPositionCommand(closedLoopIndex); //This index will need to be set. Currently is 0
             getActualPosition();
             bangBang();
-        }  
+        }
     }
 
 
