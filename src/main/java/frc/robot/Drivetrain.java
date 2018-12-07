@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.VictorSP;
 
+
 public class Drivetrain {
 
     VictorSP motorFrontLeft;
@@ -17,7 +18,7 @@ public class Drivetrain {
 
     }
 
-    public void setFwdRevCommand(double cmd_in){
+    public void setFwdRevCommand(double cmd_in) {
 
     }
 
