@@ -9,24 +9,20 @@ public class Xbox {
 
     XboxController xboxCtrlr;
 
-
-    double XboxFwdRevCmd;
+    double XboxFwdRevCmd = 0;
+    double XboxLeftRightCmd = 0;
 
     
 private Xbox() {
-    xboxCtrlr = new XboxController(1);
+    xboxCtrlr = new XboxController(0);
 }
 
-public double getXboxFwdCmd() {
-    double driverLeftYValue = -1 * xboxCtrlr.getY(Hand.kLeft);
-    if (xboxCtrlr.getTriggerAxis(Hand.kRight) > 0.5 ) {
-        XboxFwdRevCmd *= 0.7;
-    }
-    if (driverLeftYValue > -0.15 & driverLeftYValue < 0.15) {
-        XboxFwdRevCmd = 0;
-    }
-    return (Math.pow(XboxFwdRevCmd,3));
+
+public double getX(GenericHID.Hand kRight){
+    return XboxLeftRightCmd;
 }
+public double getY(GenericHID.Hand kLeft){
+    return XboxFwdRevCmd;
 }
 
 
@@ -36,3 +32,9 @@ public double getXboxFwdCmd() {
 
 
 }
+
+
+
+
+
+
