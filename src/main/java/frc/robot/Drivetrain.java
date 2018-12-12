@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.VictorSP;
 
+import frc.robot.Xbox;
 
 public class Drivetrain {
 
@@ -9,6 +10,9 @@ public class Drivetrain {
     VictorSP motorFrontRight;
     VictorSP motorRearLeft;
     VictorSP motorRearRight;
+
+    double curFwdRevCmd = 0;
+    double curRotateCmd = 0;
 
     public Drivetrain(){
         motorFrontLeft = new VictorSP(1);
@@ -19,11 +23,12 @@ public class Drivetrain {
     }
 
     public void setFwdRevCommand(double cmd_in) {
+        cmd_in = curFwdRevCmd;
 
     }
 
     public void setRotateCommand(double cmd_in){
-
+        cmd_in = curRotateCmd;
     }
     
     public void update(){

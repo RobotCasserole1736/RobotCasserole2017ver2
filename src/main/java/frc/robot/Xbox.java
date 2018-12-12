@@ -10,7 +10,7 @@ public class Xbox {
     XboxController xboxCtrlr;
 
     double XboxFwdRevCmd = 0;
-    double XboxLeftRightCmd = 0;
+    double XboxRotateCmd = 0;
 
     
 private Xbox() {
@@ -19,9 +19,13 @@ private Xbox() {
 
 
 public double getX(GenericHID.Hand kRight){
-    return XboxLeftRightCmd;
+    
+    
+    return XboxRotateCmd;
 }
 public double getY(GenericHID.Hand kLeft){
+    
+    
     return XboxFwdRevCmd;
 }
 
