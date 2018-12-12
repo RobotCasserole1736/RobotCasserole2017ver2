@@ -8,6 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
+
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -20,6 +23,7 @@ public class Robot extends TimedRobot {
 
   Drivetrain drivetrain;
   Turret turret;
+  XboxController operatorController;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -29,6 +33,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     drivetrain = new Drivetrain();
     turret = new Turret();
+    operatorController = new XboxController(0);
 
   }
 
@@ -49,7 +54,14 @@ public class Robot extends TimedRobot {
     drivetrain.setRotateCommand(0); //todo populate this from xbox rather than "0"
     drivetrain.update();
 
-    turret.setOpenLoopRotationCommand(0); //todo populate this from xbox rather than "0"
+    if((operatorController.getAButton()) == true){
+      turret.setClosedLoopIndex(0);
+    }else if((operatorController.getBButton()) == true){
+      turret.setClosedLoopIndex(1);
+    }else if((operatorController.getXButton()) == true){
+      turret.setClosedLoopIndex(2);
+    }
+    turret.setOpenLoopRotationCommand(operatorController.getX(Hand.kLeft)); 
     turret.update();
 
   }
