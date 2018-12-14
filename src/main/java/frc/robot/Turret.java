@@ -31,6 +31,10 @@ public class Turret {
 
     }
 
+    public void setClosedLoop(boolean loop){
+        runClosedLoop = loop;
+    }
+
     public void setOpenLoopRotationCommand(double cmd){
         runClosedLoop = false;
         openLoopRotationCmd = cmd;
@@ -59,20 +63,26 @@ public class Turret {
     public void bangBang(){
         if((actualPos <= (closedLoopPosCmd_deg + 1)) || (actualPos >= (closedLoopPosCmd_deg - 1))){
             motorControl.set(0);
-        }else if(actualPos <= closedLoopPosCmd_deg){
+        }else if(actualPos <= (closedLoopPosCmd_deg - 1)){
             motorControl.set(-1);
-        }else if(actualPos >= closedLoopPosCmd_deg){
+        }else if(actualPos >= (closedLoopPosCmd_deg + 1)){
             motorControl.set(1);
         }
     }
 
     public void update(){
-        if(leftLimitSw.get() == true || rightLimitSw.get() == true){
+
+        //Safety
+        if(leftLimitSw.get() == true && openLoopRotationCmd <= 0){
             motorControl.set(0);
-            
+        }else if(rightLimitSw.get() == true && openLoopRotationCmd >=0){
+            motorControl.set(0);
+
+        //Open Loop    
         }else if(runClosedLoop == false){
             motorControl.set(openLoopRotationCmd);
 
+        //Closed Loop    
         }else if(runClosedLoop == true){
             setClosedLoopPositionCommand(closedLoopIndex);
             getActualPosition();

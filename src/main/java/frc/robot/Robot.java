@@ -54,6 +54,17 @@ public class Robot extends TimedRobot {
     drivetrain.setRotateCommand(0); //todo populate this from xbox rather than "0"
     drivetrain.update();
 
+    //Is it open or closed loop? Now we know!
+    if(operatorController.getX(Hand.kLeft) != 0){
+      turret.setClosedLoop(false);
+    }else if(operatorController.getAButton() == true){
+      turret.setClosedLoop(true);
+    }else if(operatorController.getBButton() == true){
+      turret.setClosedLoop(true);
+    }else if(operatorController.getXButton() == true){
+      turret.setClosedLoop(true);
+
+    //Set your index for closed loop
     if((operatorController.getAButton()) == true){
       turret.setClosedLoopIndex(0);
     }else if((operatorController.getBButton()) == true){
@@ -61,9 +72,11 @@ public class Robot extends TimedRobot {
     }else if((operatorController.getXButton()) == true){
       turret.setClosedLoopIndex(2);
     }
+
     turret.setOpenLoopRotationCommand(operatorController.getX(Hand.kLeft)); 
     turret.update();
 
   }
 
+  }
 }
