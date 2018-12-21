@@ -21,7 +21,7 @@ public class Drivetrain {
         motorRearRight = new VictorSP(4);
 
     }
-
+    
     public void setFwdRevCommand(double cmd_in) {
         cmd_in = curFwdRevCmd;
 
@@ -32,7 +32,7 @@ public class Drivetrain {
     }
     
     public void update(){
-
+        
     }
 
 

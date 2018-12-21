@@ -10,7 +10,7 @@ public class Xbox {
     XboxController xbox;
 
     double xboxFwdRevCmd = 0;
-    double xboxRotateCmd;
+    double xboxRotateCmd = 0;
 
     
 private Xbox() {
@@ -30,15 +30,15 @@ public double getXboxRotateCmd(){
     return xboxRotateCmd;
 }
 
-public double getY(GenericHID.Hand kLeft){
+public double getY(){
     
-    if (xbox.getX(Hand.kRight) > 0.5) {
+    if (xbox.getX(Hand.kLeft) > 0.5) {
         xboxFwdRevCmd *= 0.7;
-    if (xbox.getX(Hand.kRight) < 0.15 & xbox.getX(Hand.kRight) > -0.15) {
-        xboxFwdRevCmd = xbox.getX(Hand.kRight);
+    if (xbox.getX(Hand.kLeft) < 0.15 & xbox.getX(Hand.kLeft) > -0.15) {
+        xboxFwdRevCmd = xbox.getX(Hand.kLeft);
         }
     }
-    xboxFwdRevCmd = Math.pow(xboxRotateCmd, 3);
+    xboxFwdRevCmd = Math.pow(xboxFwdRevCmd, 3);
     
     return xboxFwdRevCmd;
 }
